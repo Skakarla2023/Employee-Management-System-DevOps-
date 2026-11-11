@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Employees | Employee Manager{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div><h1 class="h3 mb-1">Employees</h1><p class="text-muted mb-0">Manage your employee records.</p></div>
+  <form class="d-flex gap-2" method="get">
+    <input class="form-control" name="q" value="{{ search }}" placeholder="Search employees">
+    <button class="btn btn-outline-primary">Search</button>
+    {% if search %}<a class="btn btn-outline-secondary" href="{{ url_for('index') }}">Clear</a>{% endif %}
+  </form>
+</div>
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Designation</th><th>Salary</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for employee in employees %}
+        <tr>
+          <td>{{ employee.id }}</td><td class="fw-semibold">{{ employee.name }}</td>
+          <td>{{ employee.email }}</td><td>{{ employee.department or '—' }}</td>
+          <td>{{ employee.designation or '—' }}</td>
+          <td>{{ "%.2f"|format(employee.salary or 0) }}</td>
+          <td class="text-nowrap">
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('edit_employee', employee_id=employee.id) }}">Edit</a>
+            <form class="d-inline" method="post" action="{{ url_for('delete_employee', employee_id=employee.id) }}" onsubmit="return confirm('Delete this employee?')">
+              <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="7" class="text-center text-muted py-5">No employees found. Add your first employee.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

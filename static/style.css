@@ -1,0 +1,5 @@
+body { background: #f5f7fb; color: #202938; }
+.navbar { background: #243b65; }
+.card { border-radius: 12px; }
+.table thead th { background: #edf1f7; color: #4b5870; font-size: .85rem; white-space: nowrap; }
+.form-card { max-width: 760px; }

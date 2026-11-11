@@ -1,0 +1,15 @@
+services:
+  employee-app:
+    build: .
+    container_name: employee-management-app
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_PATH: /app/data/employees.db
+      SECRET_KEY: change-this-for-real-deployment
+    volumes:
+      - employee_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  employee_data:
