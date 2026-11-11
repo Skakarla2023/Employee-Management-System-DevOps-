@@ -16,10 +16,10 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                sh '. .venv/bin/activate && pytest -q'
-            }
-        }
+    steps {
+        sh '. .venv/bin/activate && python -m pytest -q'
+    }
+}
 
         stage('Build Docker Image') {
             steps {
