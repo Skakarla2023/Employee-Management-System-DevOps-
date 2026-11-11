@@ -1,7 +1,7 @@
+
 services:
   employee-app:
     build: .
-    container_name: employee-management-app
     ports:
       - "5000:5000"
     environment:
